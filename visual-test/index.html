@@ -32,6 +32,21 @@
         .row div{
             margin-top: 20px;
         }
+
+        .back-img{
+            width:100%;
+            position: absolute;
+            top: 197px;
+            opacity: 0.4;
+        }
+
+        .diff-img{
+            width:100%;
+            position: absolute;
+            top: 197px;
+            z-index: 10;
+            opacity: 0.8;
+        }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -103,6 +118,14 @@
         </div>
         <!-- /.row -->
 
+        <div class="row">
+            <div class="result-container">      
+                    <img id="imgA" class="back-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" >
+                    <img id="imgB" class="back-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" >
+                    <img id="imgResult" class="diff-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" >
+            </div>
+        </div>
+
     </div>
     <!-- /.container -->
 
@@ -111,6 +134,19 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+        function removeNL(s){ 
+          return s.replace(/[\n\r\t]/g,''); 
+        }
+
+        $('.compare-button').on('click', function(){
+            // http://ec2-52-6-176-178.compute-1.amazonaws.com/websites/compare?siteA=www.mercadolibre.com.ar&callback=lala&siteB=www.mercadolibre.com.ar&cookiesA=meliLab%3DA&cookiesB=
+        });
+
+
+    </script>
 
 </body>
 
