@@ -33,17 +33,21 @@
             margin-top: 20px;
         }
 
+        .compare-container{
+            position: relative;
+        }
+
         .back-img{
             width:100%;
             position: absolute;
-            top: 197px;
-            opacity: 0.4;
+            top: 0px;
+            opacity: 0.5;
         }
 
         .diff-img{
             width:100%;
             position: absolute;
-            top: 197px;
+            top: 0px;
             z-index: 10;
             opacity: 0.8;
         }
@@ -119,7 +123,7 @@
         <!-- /.row -->
 
         <div class="row">
-            <div class="result-container">      
+            <div class="compare-container">      
                     <img id="imgA" class="back-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" >
                     <img id="imgB" class="back-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" >
                     <img id="imgResult" class="diff-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" >
@@ -141,8 +145,38 @@
           return s.replace(/[\n\r\t]/g,''); 
         }
 
+        function emptyPng(image){
+            $("#"+image).attr("src","data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+        }
+
         $('.compare-button').on('click', function(){
             // http://ec2-52-6-176-178.compute-1.amazonaws.com/websites/compare?siteA=www.mercadolibre.com.ar&callback=lala&siteB=www.mercadolibre.com.ar&cookiesA=meliLab%3DA&cookiesB=
+            if($( "input[name='siteA']" ).val() == '' ||  $( "input[name='siteB']" ).val() == ''){
+                alert("te olvidaste de la url che");
+            }
+
+
+            $.ajax({
+                url: "http://ec2-52-6-176-178.compute-1.amazonaws.com/websites/compare",
+                jsonp: "callback",
+                dataType: "jsonp",
+             
+                data: {
+                    siteA : $( "input[name='siteA']" ).val(),
+                    siteB : $( "input[name='siteB']" ).val(),
+                    cookiesA : $( "textarea[name='cookiesA']" ).val(),
+                    cookiesB : $( "textarea[name='cookiesB']" ).val(),
+                    format: "json"
+                },
+             
+                // Work with the response
+                success: function( response ) {
+                    $("#imgA").attr("src","data:image/gif;base64,"+response.snapshootA);
+                    $("#imgB").attr("src","data:image/gif;base64,"+response.snapshootB);
+                    $("#imgResult").attr("src","data:image/gif;base64,"+response.result);
+                    console.log( response ); // server response
+                }
+            });
         });
 
 
