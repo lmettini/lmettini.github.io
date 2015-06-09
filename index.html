@@ -19,6 +19,36 @@
         margin-top: 20px;
         padding: 20px;
       }
+
+      .continer-images{
+          position: relative;
+          width: 230px;
+          height:230px;
+          margin:auto;
+
+      }
+      .behind-image{
+          position: absolute;
+          top: 0px;
+          overflow: hidden;
+          width:230px;
+          height:230px;
+      }
+
+      .front-image{
+          position: absolute;
+          top: 0px;
+          width:230;
+          height:230px;
+          opacity: 1;
+          transition-property: opacity;
+          transition-duration: 2s;
+          z-index: 100;
+      }
+      .front-image:hover {
+          opacity: 0;
+      }
+
     </style>
 
   </head>
@@ -26,7 +56,14 @@
     <div class="container">
       <div class="row personal-info">
         <div class="col-xs-12 text-center">
-          <img class="avatar" height="230" width="230" src="avatar.jpg" alt="avatar">
+          <div class="continer-images">
+              <div class="front-image">
+                  <img class="avatar" height="230" width="230" src="avatar2.jpg" alt="avatar">
+              </div>
+              <div class="behind-image">
+                   <img class="avatar" height="230" width="230" src="avatar.jpg" alt="avatar">
+              </div>
+          </div>
           <h1>Leandro Mettini</h1>
           <p class="lead">Software developer</p>
           <a href="https://www.facebook.com/lmettini"><i class="fa fa-2x fa-facebook-official"></i></a>
