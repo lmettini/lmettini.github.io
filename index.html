@@ -14,10 +14,14 @@
       .avatar{
         border-radius: 125px;
       }
-      .row.personal-info{
+      .row.row-style{
         background-color: #FFFFFF;
         margin-top: 20px;
         padding: 20px;
+      }
+
+      .row.row-project{
+          text-align: center;
       }
 
       .continer-images{
@@ -54,7 +58,7 @@
   </head>
   <body cz-shortcut-listen="true">
     <div class="container">
-      <div class="row personal-info">
+      <div class="row row-style personal-info">
         <div class="col-xs-12 text-center">
           <div class="continer-images">
               <!--div class="front-image">
@@ -72,6 +76,10 @@
           <a href="https://github.com/lmettini"><i class="fa fa-2x fa-github-square "></i></a>
           <a href="mailto:leandro.mettini@gmail.com"><i class="fa fa-2x fa-envelope-square  "></i></a>
         </div>
+      </div>
+      <div class="row row-style row-project">
+        <h2>Some projects</h2>
+          <p><a class="btn btn-primary btn-lg" href="/visual-test">Visual test - compare two websites pixel by pixel</a></p>
       </div>
     </div>
 <script>
