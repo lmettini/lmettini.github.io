@@ -23,7 +23,9 @@
     <script >
         $('#deeplink').on('click',function(){
 
-            window.location = url('?newurl');
+            var newurl = url('?newurl');
+            alert('redirecting to '+newurl);
+            window.location = newurl;
 
         });
     </script>
