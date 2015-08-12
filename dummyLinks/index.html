@@ -33,6 +33,10 @@
 
         if(method=='injectIframe'){
             $('#iframePlayground').attr('src',newurl)
+            setTimeout(function(){
+                alert('it looks your deeplink didn\'t work');
+                window.location = 'https://play.google.com/store/apps/details?id=com.booking&hl=en';
+            });
         }
 
         if(method=='onLoading'){
