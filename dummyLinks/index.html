@@ -31,11 +31,17 @@
             window.location = newurl;
         }
 
+
+
         if(method=='injectIframe'){
+            var timeOfDL = new Date().getTime();
             $('#iframePlayground').attr('src',newurl)
             setTimeout(function(){
-                alert('it looks your deeplink didn\'t work');
-                window.location = 'https://play.google.com/store/apps/details?id=com.booking&hl=en';
+                if(new Date().getTime() - timeOfDL < 300){
+                    alert('it looks your deeplink didn\'t work');
+                    window.location = 'https://play.google.com/store/apps/details?id=com.booking&hl=en';
+                    
+                }
             },150);
         }
 
