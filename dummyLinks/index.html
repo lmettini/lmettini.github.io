@@ -20,13 +20,27 @@
 
     <input type="button" id="deeplink" value="GO!GO!GO!"/>
 
-    <script >
-        $('#deeplink').on('click',function(){
+    <iframe id='iframePlayground' style="display:none" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="></iframe>
 
-            var newurl = url('?newurl');
+    <script >
+        var method = url('?method');
+        var newurl = url('?newurl');
+
+        var redirectToNewurl = function() {
             alert('redirecting to '+newurl);
             window.location = newurl;
+        }
 
+        if(method=='injectIframe'){
+            $('#iframePlayground').attr('src',newurl)
+        }
+
+        if(method=='onLoading'){
+            redirectToNewurl();
+        }
+
+        $('#deeplink').on('click',function(){
+            redirectToNewurl();
         });
     </script>
 
