@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dummy links- lmettini</title>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="js/url.min.js"></script>
+    
+</head>
+
+<body>
+
+    <input type="button" id="deeplink" value="GO!GO!GO!"/>
+
+    <script >
+        $('#deeplink').on('click',function(){
+
+            window.location = url('?newurl');
+
+        });
+    </script>
+
+</body>
+
+</html>
