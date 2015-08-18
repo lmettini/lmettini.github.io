@@ -90,13 +90,13 @@
             <div class="modal-content">
               <div class="modal-body">
                 <pre class="prettyprint">
+                    // observer to update the title of the section
                     dataObs.observe('search-data',function(data){
-                        // update the title of the section
                         $('.result-title').html(data.title);
                     });
 
+                    // observer to show the first photo
                     dataObs.observe('search-data',function(data){
-                        // show the first photo
                         if(data.items.length>0){
                             var firstPhoto = data.items[0];
                             $('#first-img-src').attr('src',firstPhoto.media.m);
@@ -104,8 +104,8 @@
                         }
                     });
 
+                    // observer to control if any data must be shown or not
                     dataObs.observe('search-data',function(data){
-                        // control if any data must be shown or not
                         if(data.items.length>0){
                             $('.results-container').show();
                             $('.no-results-container').hide();
@@ -115,12 +115,13 @@
                         }
                     });
 
-                    $('.search-button').on('click',function(e){
+                    $('#img-srch-form').on('submit',function(e){
                         $.getJSON( flickerAPIurl, {
                             tags: query,
                             tagmode: "any",
                             format: "json"
                         }).done(function( data ) {
+                            // set the new data to trigger observers
                             dataObs.set('search-data',data);
                         });
                     });
@@ -139,12 +140,14 @@
                 <h1>Playground for data-obs</h1>
                 <p class="lead">Just to prove a simple use of this tool</p>   
             </div>
-            <div class="col-md-4 col-md-offset-4 text-center ">
-                <input id="query" class="form-control" type="text" placeholder="What do you want to see"/>
-            </div>
-            <div class="col-md-4 col-md-offset-4 text-center search-btn-cont">
-                <button type="button" class="btn btn-primary search-button btn-lg">Search</button>
-            </div>
+            <form id="img-srch-form" action="#">
+                <div class="col-md-4 col-md-offset-4 text-center ">
+                    <input id="query" class="form-control" type="text" placeholder="What do you want to see"/>
+                </div>
+                <div class="col-md-4 col-md-offset-4 text-center search-btn-cont">
+                    <input type="submit" value="Search" class="btn btn-primary search-button btn-lg" >
+                </div>
+            </form>
         </div>
         <hr>
         <div class="row results-container">
@@ -169,13 +172,13 @@
     <script src="data-obs/data-obs.js"></script>
     <script src="js/jquery.js"></script>
     <script type="text/javascript">
+        // observer to update the title of the section
         dataObs.observe('search-data',function(data){
-            // update the title of the section
             $('.result-title').html(data.title);
         });
 
+        // observer to show the first photo
         dataObs.observe('search-data',function(data){
-            // show the first photo
             if(data.items.length>0){
                 var firstPhoto = data.items[0];
                 $('#first-img-src').attr('src',firstPhoto.media.m);
@@ -183,8 +186,8 @@
             }
         });
 
+        // observer to control if any data must be shown or not
         dataObs.observe('search-data',function(data){
-            // control if any data must be shown or not
             if(data.items.length>0){
                 $('.results-container').show();
                 $('.no-results-container').hide();
@@ -194,7 +197,7 @@
             }
         });
 
-        $('.search-button').on('click',function(e){
+        $('#img-srch-form').on('submit',function(e){
             var query = $('#query').val();
             var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
             $.getJSON( flickerAPI, {
@@ -202,6 +205,7 @@
                 tagmode: "any",
                 format: "json"
             }).done(function( data ) {
+                // set the new data to trigger observers
                 dataObs.set('search-data',data);
             });
 
