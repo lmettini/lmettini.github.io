@@ -37,12 +37,12 @@
             var timeOfDL = new Date().getTime();
             $('#iframePlayground').attr('src',newurl)
             setTimeout(function(){
-                if(new Date().getTime() - timeOfDL < 300){
+                if(new Date().getTime() - timeOfDL < 600){
                     alert('it looks your deeplink didn\'t work');
                     window.location = 'https://play.google.com/store/apps/details?id=com.booking&hl=en';
                     
                 }
-            },150);
+            },400);
         }
 
         if(method=='onLoading'){
