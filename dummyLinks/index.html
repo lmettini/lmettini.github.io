@@ -18,7 +18,9 @@
 
 <body>
 
-    <input type="button" id="deeplink" value="GO!GO!GO!"/>
+    <input type="button" id="deeplink" value="GO!GO!GO! (js redirect)"/>
+    <hr>
+    <a id="linky" href="#">GO!GO!GO! (native redirect)</a>
 
     <iframe id='iframePlayground' style="display:none" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs="></iframe>
 
@@ -31,6 +33,7 @@
             window.location = newurl;
         }
 
+        document.getElementById("linky").href=newurl; 
 
 
         if(method=='injectIframe'){
