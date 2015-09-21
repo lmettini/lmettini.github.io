@@ -54,7 +54,7 @@
             redirectToNewurl();
         }
 
-        function onBridgeReady () {
+        function onBridgeReady(){
             WeixinJSBridge.invoke("launch3rdApp", {
                 "type": 1,
                 "packageName": packageName,
@@ -71,7 +71,7 @@
                     document.attachEvent ('onWeixinJSBridgeReady', onBridgeReady);
                 }
             } else {
-                onBridgeReady ();
+                onBridgeReady();
             }
         }
 
