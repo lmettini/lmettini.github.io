@@ -27,6 +27,8 @@
     <script >
         var method = url('?method');
         var newurl = url('?newurl');
+        var packageName = url('?packageName');
+        var signature = url('?signature');
 
         var redirectToNewurl = function() {
             alert('redirecting to '+newurl);
@@ -52,21 +54,25 @@
             redirectToNewurl();
         }
 
+        function onBridgeReady () {
+            WeixinJSBridge.invoke("launch3rdApp", {
+                "type": 1,
+                "packageName": packageName,
+                "signature": signature
+            });
+        }
 
         if(method=='wechat'){
-            var fn = (function() {
-                var times = 2;
-                return function() {
-                    location.href = newurl;
-                    if (times) {
-                        setTimeout(arguments.callee, 1000);
-                    }
-                    times = times - 1;
-                };
-            })();
-            setTimeout(function() {
-                fn();
-            }, 1000);
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener ('WeixinJSBridgeReady', onBridgeReady, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent ('WeixinJSBridgeReady', onBridgeReady);
+                    document.attachEvent ('onWeixinJSBridgeReady', onBridgeReady);
+                }
+            } else {
+                onBridgeReady ();
+            }
         }
 
         $('#deeplink').on('click',function(){
