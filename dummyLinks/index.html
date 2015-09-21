@@ -59,6 +59,8 @@
                 "type": 1,
                 "packageName": packageName,
                 "signature": signature
+            },function(res) {
+                alert(res.err_msg);
             });
         }
 
@@ -75,9 +77,15 @@
             }
         }
 
-        $('#deeplink').on('click',function(){
-            redirectToNewurl();
-        });
+        if(method=='wechat'){
+            $('#deeplink').on('click',function(){
+                onBridgeReady();
+            });
+        } else {
+            $('#deeplink').on('click',function(){
+                redirectToNewurl();
+            });
+        }
     </script>
 
 </body>
