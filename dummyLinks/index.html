@@ -27,8 +27,10 @@
     <script >
         var method = url('?method');
         var newurl = url('?newurl');
+        var scheme = url('?scheme');
         var packageName = url('?packageName');
-        var signature = url('?signature');
+        var iosId = url('?iosId');
+
 
         var redirectToNewurl = function() {
             alert('redirecting to '+newurl);
@@ -55,16 +57,23 @@
         }
 
         function onBridgeReady(){
-            WeixinJSBridge.invoke("launch3rdApp", {
-                "type": 1,
-                "packageName": packageName,
-                "signature": signature
-            },function(res) {
+             WeixinJSBridge.invoke("getInstallState", {
+                 "packageUrl": scheme,
+                 "packageName": packageName
+             }, function(res) {
                 alert(res.err_msg);
-            });
+                var err = (res.err_msg || ':').split(':')[1],
+                norxp = /^(no|not_allow|access_denied)$/i;
+                if (err && !norxp.test(err)) {
+                    window.location.href = scheme+'://';
+                } else {
+                    window.location.href = 'https://itunes.apple.com/app/id'+iosId;
+                }
+             });
         }
 
         if(method=='wechat'){
+
             if (typeof WeixinJSBridge == "undefined") {
                 if (document.addEventListener) {
                     document.addEventListener ('WeixinJSBridgeReady', onBridgeReady, false);
