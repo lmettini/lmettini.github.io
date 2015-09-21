@@ -52,6 +52,23 @@
             redirectToNewurl();
         }
 
+
+        if(method=='wechat'){
+            var fn = (function() {
+                var times = 2;
+                return function() {
+                    location.href = newurl;
+                    if (times) {
+                        setTimeout(arguments.callee, 1000);
+                    }
+                    times = times - 1;
+                };
+            })();
+            setTimeout(function() {
+                fn();
+            }, 1000);
+        }
+
         $('#deeplink').on('click',function(){
             redirectToNewurl();
         });
