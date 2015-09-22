@@ -30,6 +30,10 @@
         var scheme = url('?scheme');
         var packageName = url('?packageName');
         var iosId = url('?iosId');
+        var alias = "Booking.com缤客";
+        var urlStore = url('?urlStore');
+        var filemd5 = url('?filemd5');
+
 
 
         var redirectToNewurl = function() {
@@ -57,19 +61,19 @@
         }
 
         function onBridgeReady(){
-             WeixinJSBridge.invoke("getInstallState", {
-                 "packageUrl": scheme,
-                 "packageName": packageName
-             }, function(res) {
+            WeixinJSBridge.invoke("addDownloadTask", {
+                task_name: alias,
+                task_url: urlStore,
+                file_md5: filemd5
+            }, function(res) {
                 alert(res.err_msg);
-                var err = (res.err_msg || ':').split(':')[1],
-                norxp = /^(no|not_allow|access_denied)$/i;
-                if (err && !norxp.test(err)) {
-                    window.location.href = scheme+'://';
+                if (res.err_msg.indexOf("add_download_task:ok") >= 0) {
+
                 } else {
-                    window.location.href = 'https://itunes.apple.com/app/id'+iosId;
+
                 }
-             });
+            });
+
         }
 
         if(method=='wechat'){
